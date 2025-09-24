@@ -29,12 +29,17 @@ fun TaskDetailScreen (
             TopAppBar(
                 title = { Text(text = task?.title ?: "") },
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
                         Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 actions = {
-                    TextButton(onClick = { /*TODO*/ }) {
+                    TextButton(onClick = {
+                        viewModel.deleteTask(task?.id)
+                        navController.popBackStack()
+                    }) {
                         Text(text = "Delete")
                     }
                 }

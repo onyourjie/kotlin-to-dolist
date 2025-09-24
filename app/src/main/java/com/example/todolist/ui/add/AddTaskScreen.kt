@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.todolist.model.Task
 import com.example.todolist.model.ToDoAppViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,12 +32,21 @@ fun AddTaskScreen(
             TopAppBar(
                 title = { Text(text = "Add Task") },
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 actions = {
-                    TextButton(onClick = { /*TODO*/ }) {
+                    TextButton(onClick = {
+                        val newTask = Task(
+                            id = (viewModel.tasks.size + 1).toString(),
+                            title = taskTitle,
+                            description = taskDescription
+                        )
+
+                        viewModel.addTask(newTask)
+                        navController.popBackStack()
+                    }) {
                         Text(text = "Save")
                     }
                 }
