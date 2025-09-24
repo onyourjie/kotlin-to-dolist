@@ -11,11 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.todolist.model.ToDoAppViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen (
-
+    viewModel : ToDoAppViewModel
 ){
     Scaffold(
         topBar = {
@@ -36,14 +37,16 @@ fun HomeScreen (
     ){
         innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
-                items(emptyList<String>()) { item ->
+                items(viewModel.tasks) { task ->
                     Card (
                         modifier = Modifier.padding(8.dp)
                             .clickable{
                                 //TODO: Navigate to task details
                             }
                     ){
-                        Text(text = "hello")
+                        Text(text = task.title,
+                            style = MaterialTheme.typography.titleLarge,
+                            modifier = Modifier.padding(16.dp))
                     }
                 }
         }
@@ -53,5 +56,5 @@ fun HomeScreen (
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(viewModel = ToDoAppViewModel())
 }
