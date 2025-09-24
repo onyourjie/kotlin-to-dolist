@@ -11,11 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.todolist.model.ToDoAppViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen (
+    navController: NavController,
     viewModel : ToDoAppViewModel
 ){
     Scaffold(
@@ -26,7 +30,7 @@ fun HomeScreen (
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate("add") }
             ){
                Icon(
                    imageVector = Icons.Default.Add,
@@ -41,7 +45,7 @@ fun HomeScreen (
                     Card (
                         modifier = Modifier.padding(8.dp)
                             .clickable{
-                                //TODO: Navigate to task details
+                                navController.navigate("detail/${task.id}")
                             }
                     ){
                         Text(text = task.title,
@@ -52,9 +56,8 @@ fun HomeScreen (
         }
     }
 }
-
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(viewModel = ToDoAppViewModel())
+    HomeScreen(navController = rememberNavController(), viewModel = viewModel<ToDoAppViewModel>())
 }

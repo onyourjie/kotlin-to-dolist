@@ -12,12 +12,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.todolist.model.ToDoAppViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskScreen(
-    viewModel: ToDoAppViewModel
+    navController: NavController,
+    viewModel: ToDoAppViewModel,
 ) {
     var taskTitle by remember { mutableStateOf("") }
     var taskDescription by remember { mutableStateOf("") }
@@ -69,5 +73,5 @@ fun AddTaskScreen(
 @Preview
 @Composable
 fun AddTaskScreenPreview() {
-    AddTaskScreen(viewModel = ToDoAppViewModel())
+    AddTaskScreen(navController = rememberNavController(), viewModel = viewModel<ToDoAppViewModel>())
 }
