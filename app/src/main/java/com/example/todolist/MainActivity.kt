@@ -34,14 +34,15 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
-        modifier = modifier
+        modifier = modifier.then(Modifier.fillMaxSize()),
+        textAlign = androidx.compose.ui.text.style.TextAlign.Center
     )
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     TodoListTheme {
-        Greeting("Android")
+        Greeting("Robby")
     }
 }
